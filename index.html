@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Information Form</title>
+
+<style>
+
+/* -----------------------------------------------------
+   🌌 CYBER GALAXY BACKGROUND
+----------------------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #05010f, #0b0033, #140050, #1b0066);
+    background-size: 400% 400%;
+    animation: bgMove 15s infinite alternate;
+    color: white;
+}
+
+@keyframes bgMove {
+    0% {background-position: 0% 50%;}
+    100% {background-position: 100% 50%;}
+}
+
+/* Neon stars */
+.star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px cyan, 0 0 12px cyan;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1.3); }
+}
+
+/* -----------------------------------------------------
+   🌠 FORM CONTENT (NO BOX — FLOATING DESIGN)
+----------------------------------------------------- */
+.container {
+    width: 90%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #5cfffb, 0 0 20px #5cfffb;
+}
+
+/* -----------------------------------------------------
+   ✨ INPUTS — BRIGHT NEON
+----------------------------------------------------- */
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 17px;
+    font-weight: 500;
+    text-shadow: 0 0 6px #6d8cff;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 14px;
+    border: 2px solid #00eaff;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 16px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 12px #00eaff;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    transform: scale(1.05);
+    border-color: #6bfffd;
+    box-shadow: 0 0 18px #6bfffd;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.valid { color: #5CFF85; font-weight: bold; }
+.error { color: #FF6B6B; font-weight: bold; }
+
+/* -----------------------------------------------------
+   🪐 BUTTONS
+----------------------------------------------------- */
+button {
+    padding: 14px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: 0.3s;
+}
+
+.reset-btn {
+    background: #ff6ba3;
+    color: white;
+    box-shadow: 0 0 16px #ff6ba3;
+}
+
+.submit-btn {
+    background: #5CFF85;
+    color: #002d14;
+    box-shadow: 0 0 16px #5CFF85;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px white;
+}
+
+/* -----------------------------------------------------
+   🚀 SUCCESS MESSAGE
+----------------------------------------------------- */
+.success {
+    background: rgba(92,255,133,0.2);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 16px;
+    border: 2px solid #5CFF85;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 0 25px #5CFF85;
+    animation: zoomIn 0.6s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.3); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+</style>
+</head>
+<body>
+
+<script>
+// Create neon stars
+for(let i = 0; i < 70; i++){
+    let s = document.createElement("div");
+    s.className = "star";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(s);
+}
+</script>
+
+<div class="container">
+    <h2>Student Information Form</h2>
+
+    <form id="studentForm" novalidate>
+
+        <label>Last Name:</label>
+        <input type="text" id="lastName">
+        <div id="lastNameMsg"></div>
+
+        <label>First Name:</label>
+        <input type="text" id="firstName">
+        <div id="firstNameMsg"></div>
+
+        <label>Middle Name (Optional):</label>
+        <input type="text" id="middleName">
+        <div id="middleNameMsg"></div>
+
+        <label>Course:</label>
+        <select id="course">
+            <option value="">Select Course</option>
+            <option>BSIT</option>
+            <option>BSCS</option>
+            <option>BSEMC</option>
+        </select>
+        <div id="courseMsg"></div>
+
+        <label>Year:</label>
+        <select id="year">
+            <option value="">Select Year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+        </select>
+        <div id="yearMsg"></div>
+
+        <label>Section:</label>
+        <select id="section">
+            <option value="">Select Section</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <div id="sectionMsg"></div>
+
+        <label>Student Number (24-46031):</label>
+        <input type="text" id="studentNumber">
+        <div id="studentNumberMsg"></div>
+
+        <label>Date of Birth:</label>
+        <input type="date" id="birthdate">
+        <div id="birthdateMsg"></div>
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+        <div id="genderMsg"></div>
+
+        <label>Complete Address:</label>
+        <textarea id="address"></textarea>
+        <div id="addressMsg"></div>
+
+        <label>Contact Number:</label>
+        <input type="text" id="contact" placeholder="09xxxxxxxxx">
+        <div id="contactMsg"></div>
+
+        <label>Email:</label>
+        <input type="text" id="email" placeholder="example@gmail.com">
+        <div id="emailMsg"></div>
+
+        <button type="reset" class="reset-btn">Reset</button>
+        <button type="submit" class="submit-btn">Submit</button>
+
+        <div id="successMessage"></div>
+
+    </form>
+</div>
+
+<script>
+
+document.getElementById("studentForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let valid = true;
+
+    function validate(id, check, good, bad){
+        let msg = document.getElementById(id);
+        if(check){
+            msg.innerHTML = "<div class='valid'>✔ " + good + "</div>";
+        } else {
+            msg.innerHTML = "<div class='error'>✖ " + bad + "</div>";
+            valid = false;
+        }
+    }
+
+    // NAME VALIDATION (NO NUMBERS)
+    const namePattern = /^[A-Za-z\s-]+$/;
+
+    validate("lastNameMsg",
+        lastName.value.trim() !== "" && namePattern.test(lastName.value.trim()),
+        "Valid last name",
+        "Letters only, no numbers"
+    );
+
+    validate("firstNameMsg",
+        firstName.value.trim() !== "" && namePattern.test(firstName.value.trim()),
+        "Valid first name",
+        "Letters only, no numbers"
+    );
+
+    let mid = middleName.value.trim();
+    validate("middleNameMsg",
+        mid === "" || namePattern.test(mid),
+        "Valid middle name",
+        "Letters only, no numbers"
+    );
+
+    validate("courseMsg", course.value !== "", "Valid course", "Required");
+    validate("yearMsg", year.value !== "", "Valid year", "Required");
+    validate("sectionMsg", section.value !== "", "Valid section", "Required");
+
+    validate("studentNumberMsg",
+        /^[0-9]{2}-[0-9]{5}$/.test(studentNumber.value.trim()),
+        "Valid student number",
+        "Format: NN-NNNNN"
+    );
+
+    validate("birthdateMsg", birthdate.value !== "", "Valid birthdate", "Required");
+
+    validate("genderMsg",
+        document.querySelector("input[name='gender']:checked"),
+        "Valid gender",
+        "Select gender"
+    );
+
+    validate("addressMsg", address.value.trim() !== "", "Valid address", "Required");
+
+    validate("contactMsg",
+        /^09[0-9]{9}$/.test(contact.value.trim()),
+        "Valid number",
+        "Format: 09xxxxxxxxx"
+    );
+
+    validate("emailMsg",
+        /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim()),
+        "Valid email",
+        "Invalid email"
+    );
+
+    if(valid){
+        successMessage.innerHTML =
+            "<div class='success'>🚀 Form Successfully Submitted! All data is valid. 🌟</div>";
+
+        studentForm.reset();
+    } else {
+        successMessage.innerHTML = "";
+    }
+
+});
+</script>
+
+</body>
+</html>
